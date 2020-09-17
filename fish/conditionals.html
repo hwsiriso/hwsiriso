@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+	<style>
+		* {box-sizing: border-box; 
+		   margin: 0px;
+		}
+		#canvas-holder {background-color: white;
+						display: grid; 
+						justify-items: center; 
+						align-items: center; 
+						width: 100vw; 
+						height: 100vh; 
+		}		
+	</style>
+	<script>
+var x=11,x_1, y_1, x_2, y_2, speed_1, speed_2, size_1, size_2, color_1, color_2;
+var bubbleX_1, bubbleY_1, bubbleX_2, bubbleY_2, bubbleX_3, bubbleY_3, bubbleX_4, bubbleY_4, bubbleX_5, bubbleY_5, bubbleX_6, bubbleY_6, bubbleX_7, bubbleY_7, bubbleX_8, bubbleY_8, bubbleX_9, bubbleY_9, bubbleX_10, bubbleY_10, bubbleSpeed_1, bubbleSpeed_2, bubbleSpeed_3, bubbleSpeed_4, bubbleSpeed_5, bubbleSpeed_6, bubbleSpeed_7, bubbleSpeed_8, bubbleSpeed_9, bubbleSpeed_10, bubbleSize_1, bubbleSize_2, bubbleSize_3,  bubbleSize_4, bubbleSize_5, bubbleSize_6, bubbleSize_7, bubbleSize_8, bubbleSize_9, bubbleSize_10;  
+
+function setup() {
+    var canvas = createCanvas(600,400);
+	canvas.parent("canvas-holder");
+    	
+    x_1 = 0;
+    y_1 = 200;
+    x_2 = 0;
+    y_2 = 200;
+    speed_1 = random(0.50,2);
+    size_1 = 80;
+    speed_2 = random(0.50,2);
+    size_2 = 80;
+	color_1 = '#33ccff';
+    color_2 = '#ff99cc';
+  
+    bubbleX_1 = random(width);
+    bubbleY_1 = height;
+    bubbleX_2 = random(width);
+    bubbleY_2 = height;
+	bubbleX_3 = random(width);
+    bubbleY_3 = height;
+    bubbleX_4 = random(width);
+    bubbleY_4 = height;
+    bubbleX_5 = random(width);
+    bubbleY_5 = height;
+    bubbleX_6 = random(width);
+    bubbleY_6 = height;
+    bubbleX_7 = random(width);
+    bubbleY_7 = height;
+    bubbleX_8 = random(width);
+    bubbleY_8 = height;
+    bubbleX_9 = random(width);
+    bubbleY_9 = height;
+    bubbleX_10 = random(width);
+    bubbleY_10 = height;
+    bubbleSpeed_1 = random(0.5,2.5);
+    bubblepeed_2 = random(0.5,2.5);
+    bubbleSpeed_3 = random(0.5,2.5);
+    bubbleSpeed_4 = random(0.5,2.5);
+    bubblepeed_5 = random(0.5,2.5);
+    bubbleSpeed_6 = random(0.5,2.5);
+    bubbleSpeed_7 = random(0.5,2.5);
+    bubblepeed_8 = random(0.5,2.5);
+    bubbleSpeed_9 = random(0.5,2.5);
+    bubbleSpeed_10 = random(0.5,2.5);
+	bubbleSize_1 = random(15,25);
+	bubbleSize_2 = random(15,25);
+	bubbleSize_3 = random(15,25);
+	bubbleSize_4 = random(15,25);
+	bubbleSize_5 = random(1525);
+	bubbleSize_6 = random(15,25);
+	bubbleSize_7 = random(15,25);
+	bubbleSize_8 = random(15,25);
+	bubbleSize_9 = random(15,25);
+	bubbleSize_10 = random(15,25);
+	bubbleAlpha_1 = random(25,75);
+	bubbleAlpha_2 = random(25,75);
+	bubbleAlpha_3 = random(25,75);
+	bubbleAlpha_4 = random(25,75);
+	bubbleAlpha_5 = random(25,75);
+	bubbleAlpha_6 = random(25,75);
+	bubbleAlpha_7 = random(25,75);
+	bubbleAlpha_8 = random(25,75);
+	bubbleAlpha_9 = random(25,75);
+	bubbleAlpha_10 = random(25,75);
+}
+
+function draw() {
+	background('#2e8b57 '); 
+	noStroke();
+
+    //Krop
+    fill(color_1);
+    ellipse(x_1,y_1,size_1,size_1/2);
+    // Øje
+    fill('#000000');
+    if(speed_1 > 0){
+        ellipse(x_1+size_1/4,y_1,size_1/8,size_1/8);
+    }
+    else {
+        ellipse(x_1-size_1/4,y_1,size_1/8,size_1/8);
+    }
+    // Hale
+    fill(color_1);
+    if(speed_1 > 0){
+        triangle(x_1-size_1/2,y_1,x_1-size_1/2-size_1/4,y_1-size_1/4,x_1-size_1/2-size_1/4,y_1+size_1/4);
+    }
+    else {
+         triangle(x_1+size_1/2,y_1,x_1+size_1/2+size_1/4,y_1-size_1/4,x_1+size_1/2+size_1/4,y_1+size_1/4);
+    }
+    x_1 = x_1 + speed_1;
+    if(x_1 > width || x_1 < 0){
+         speed_1 = speed_1 * -1;
+    }
+
+    //Krop
+    fill(color_2);
+    ellipse(x_2,y_2,size_2,size_2/2);
+    // Øje
+    fill('#000000');
+    if(speed_2 > 0){
+        ellipse(x_2+size_2/4,y_2,size_2/8,size_2/8);
+    }
+    else {
+        ellipse(x_2-size_2/4,y_2,size_2/8,size_2/8);
+    }
+    // Hale
+    fill(color_2);
+    if(speed_2 > 0){
+        triangle(x_2-size_2/2,y_2,x_2-size_2/2-size_2/4,y_2-size_2/4,x_2-size_2/2-size_2/4,y_2+size_2/4);
+    }
+    else {
+         triangle(x_2+size_2/2,y_2,x_2+size_2/2+size_2/4,y_2-size_2/4,x_2+size_2/2+size_2/4,y_2+size_2/4);
+    }
+    x_2 = x_2 + speed_2;
+    if(x_2 > width || x_2 < 0){
+         speed_2 = speed_2 * -1;
+    }
+	
+	// Vi nøjes med to fisk - den blå og den røde
+	/*if((speed_1 > 0 && speed_2 < 0 && dist(x_1+(size_1/2),y_1,x_2-(size_2/2),y_2) < 10  ||
+	    speed_1 < 0 && speed_2 > 0 && dist(x_1-(size_1/2),y_1,x_2+(size_2/2),y_2) < 10 ) && 
+		x_1 > 50 && x_1 < 550 ){
+			speed_1 = speed_1 * -1;
+	}*/
+			
+	strokeWeight(2.5);
+	
+	stroke(150, 255, 255, bubbleAlpha_1);
+	fill(150, 255, 255, bubbleAlpha_1);
+	ellipse(bubbleX_1,bubbleY_1,bubbleSize_1,bubbleSize_1);
+	stroke(150, 255, 255, bubbleAlpha_2);
+    fill(150, 255, 255, bubbleAlpha_2);
+	ellipse(bubbleX_2,bubbleY_2,bubbleSize_2,bubbleSize_2);
+	stroke(150, 255, 255, bubbleAlpha_3);
+	fill(150, 255, 255, bubbleAlpha_3);
+    ellipse(bubbleX_3,bubbleY_3,bubbleSize_3,bubbleSize_3);
+	stroke(150, 255, 255, bubbleAlpha_4);
+	fill(150, 255, 255, bubbleAlpha_4);
+    ellipse(bubbleX_4,bubbleY_4,bubbleSize_4,bubbleSize_4);
+	stroke(150, 255, 255, bubbleAlpha_5);
+	fill(150, 255, 255, bubbleAlpha_5);
+    ellipse(bubbleX_5,bubbleY_5,bubbleSize_5,bubbleSize_5);
+	stroke(150, 255, 255, bubbleAlpha_6);
+	fill(150, 255, 255, bubbleAlpha_6);
+    ellipse(bubbleX_6,bubbleY_6,bubbleSize_6,bubbleSize_6);
+	stroke(150, 255, 255, bubbleAlpha_7);
+	fill(150, 255, 255, bubbleAlpha_7);
+    ellipse(bubbleX_7,bubbleY_7,bubbleSize_7,bubbleSize_7);
+	stroke(150, 255, 255, bubbleAlpha_8);
+	fill(150, 255, 255, bubbleAlpha_8);
+    ellipse(bubbleX_8,bubbleY_8,bubbleSize_8,bubbleSize_8);
+	stroke(150, 255, 255, bubbleAlpha_9);
+	fill(150, 255, 255, bubbleAlpha_9);
+    ellipse(bubbleX_9,bubbleY_9,bubbleSize_9,bubbleSize_9);
+	stroke(150, 255, 255, bubbleAlpha_10);
+	fill(150, 255, 255, bubbleAlpha_10);
+    ellipse(bubbleX_10,bubbleY_10,bubbleSize_10,bubbleSize_10);
+    
+    bubbleY_1 = bubbleY_1 - bubbleSpeed_1;
+    if(bubbleY_1 < 0){
+          bubbleY_1 = height;
+          bubbleX_1 = random(width);
+    }
+    bubbleY_2 = bubbleY_2 - bubbleSpeed_2;
+    if(bubbleY_2 < 0){
+           bubbleY_2 = height;
+           bubbleX_2 = random(width);
+    }
+	bubbleY_3 = bubbleY_3 - bubbleSpeed_3;
+    if(bubbleY_3 < 0){
+           bubbleY_3 = height;
+           bubbleX_3 = random(width);
+    }
+    bubbleY_4 = bubbleY_4 - bubbleSpeed_4;
+    if(bubbleY_4 < 0){
+          bubbleY_4 = height;
+          bubbleX_4 = random(width);
+    }
+    bubbleY_5 = bubbleY_5 - bubbleSpeed_5;
+    if(bubbleY_5 < 0){
+           bubbleY_5 = height;
+           bubbleX_5 = random(width);
+    }
+    bubbleY_6 = bubbleY_6 - bubbleSpeed_6;
+    if(bubbleY_6 < 0){
+           bubbleY_6 = height;
+           bubbleX_6 = random(width);
+    }
+    bubbleY_7 = bubbleY_7 - bubbleSpeed_7;
+    if(bubbleY_7 < 0){
+          bubbleY_7 = height;
+          bubbleX_7 = random(width);
+    }
+    bubbleY_8 = bubbleY_8 - bubbleSpeed_8;
+    if(bubbleY_8 < 0){
+           bubbleY_8 = height;
+           bubbleX_8 = random(width);
+    }
+    bubbleY_9 = bubbleY_9 - bubbleSpeed_9;
+    if(bubbleY_9 < 0){
+           bubbleY_9 = height;
+           bubbleX_9 = random(width);
+    }
+    bubbleY_10 = bubbleY_10 - bubbleSpeed_10;
+    if(bubbleY_10 < 0){
+           bubbleY_10 = height;
+           bubbleX_10 = random(width);
+    } 
+}	
+</script>
+<title>Betingelser</title>
+</head>
+<body>
+<div id="canvas-holder"></div>
+  
+</body>
+</html> 

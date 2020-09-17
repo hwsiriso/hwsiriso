@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+	<style>
+		* {box-sizing: border-box; 
+		   margin: 0px;
+		}
+		#canvas-holder {background-color: white;
+						display: grid; 
+						justify-items: center; 
+						align-items: center; 
+						width: 100vw; 
+						height: 100vh; 
+		}		
+	</style>
+	<script>
+var x=11,x_1, y_1, x_2, y_2, speed_1, speed_2, size_1, size_2, color_1, color_2;
+var x=[];
+var y=[];
+var speed=[];
+var size=[];
+var color=[];
+var i;        
+var bubbleX=[], bubbleY=[],bubbleSpeed=[], bubbleSize=[],bubbleAlpha=[];
+function setup() {
+    var canvas = createCanvas(600,400);
+	canvas.parent("canvas-holder");
+ 
+    x_1 = 0;
+    y_1 = 200;
+    x_2 = 0;
+    y_2 = 200;
+    speed_1 = random(0.50,2);
+    size_1 = 80;
+    speed_2 = random(0.50,2);
+    size_2 = 80;
+	color_1 = '#33ccff';
+    color_2 = '#ff99cc';
+    
+    for ( i=0;i<6;i++){
+        x[i]=0;
+        if (i%2){
+            y[i]=100;
+            color[i]='#33ccff';
+        }
+        else {
+            y[i]=300;
+            color[i]='#ff99cc';}
+            
+        speed[i]=random(0.50,2);
+        size[i]=80;console.log(x[i],y[i],size[i],speed[i],color[i])
+        
+    }
+  
+  for ( i=0; i<10;i++){
+          bubbleX[i] = random(width);
+            bubbleY[i] = height;
+      bubbleSpeed[i] = random(0.5,2.5);
+      bubbleSize[i] = random(15,25);
+      bubbleSize_10 = random(15,25);
+  }
+    console.log("setup kørt")
+}
+
+function draw() {
+	background('#2e8b57 '); 
+	noStroke();
+
+    //Krop
+   /* fill(color_1);
+    ellipse(x_1,y_1,size_1,size_1/2);
+    // Øje
+    fill('#000000');
+    if(speed_1 > 0){
+        ellipse(x_1+size_1/4,y_1,size_1/8,size_1/8);
+    }
+    else {
+        ellipse(x_1-size_1/4,y_1,size_1/8,size_1/8);
+    }
+    // Hale
+    fill(color_1);
+    if(speed_1 > 0){
+        triangle(x_1-size_1/2,y_1,x_1-size_1/2-size_1/4,y_1-size_1/4,x_1-size_1/2-size_1/4,y_1+size_1/4);
+    }
+    else {
+         triangle(x_1+size_1/2,y_1,x_1+size_1/2+size_1/4,y_1-size_1/4,x_1+size_1/2+size_1/4,y_1+size_1/4);
+    }
+    x_1 = x_1 + speed_1;
+    if(x_1 > width || x_1 < 0){
+         speed_1 = speed_1 * -1;
+    }
+
+    //Krop
+    fill(color_2);
+    ellipse(x_2,y_2,size_2,size_2/2);
+    // Øje
+    fill('#000000');
+    if(speed_2 > 0){
+        ellipse(x_2+size_2/4,y_2,size_2/8,size_2/8);
+    }
+    else {
+        ellipse(x_2-size_2/4,y_2,size_2/8,size_2/8);
+    }
+    // Hale
+    fill(color_2);
+    if(speed_2 > 0){
+        triangle(x_2-size_2/2,y_2,x_2-size_2/2-size_2/4,y_2-size_2/4,x_2-size_2/2-size_2/4,y_2+size_2/4);
+    }
+    else {
+         triangle(x_2+size_2/2,y_2,x_2+size_2/2+size_2/4,y_2-size_2/4,x_2+size_2/2+size_2/4,y_2+size_2/4);
+    }
+    x_2 = x_2 + speed_2;
+    if(x_2 > width || x_2 < 0){
+         speed_2 = speed_2 * -1;
+    }*/
+	
+	// Vi nøjes med to fisk - den blå og den røde
+	/*if((speed_1 > 0 && speed_2 < 0 && dist(x_1+(size_1/2),y_1,x_2-(size_2/2),y_2) < 10  ||
+	    speed_1 < 0 && speed_2 > 0 && dist(x_1-(size_1/2),y_1,x_2+(size_2/2),y_2) < 10 ) && 
+		x_1 > 50 && x_1 < 550 ){
+			speed_1 = speed_1 * -1;
+	}*/
+	for ( i=0;i<6;i++){
+         fisk (x[i],y[i],size[i],speed[i],color[i]);
+console.log(i)
+        x[i] = (x[i] + speed[i]);
+        if(x[i] > width || x[i] < 0){
+             speed[i] = speed[i] * -1;
+        }
+    }	
+   
+
+	strokeWeight(2.5);
+	for ( i=0; i<10;i++){
+        	stroke(150, 255, 255, bubbleAlpha[i]);
+	       fill(150, 255, 255, bubbleAlpha[i]);
+	       ellipse(bubbleX[i],bubbleY[i],bubbleSize[i],bubbleSize[i]);
+    }
+	
+    
+    
+    for ( i=0; i<10;i++){
+            bubbleY[i] = bubbleY[i] - bubbleSpeed[i];
+   
+}
+    for ( i=0; i<10;i++){
+           if(bubbleY[i] < 0){
+           bubbleY[i] = height;
+           bubbleX[i] = random(width);
+    } 
+   
+}
+    
+}
+        function fisk(tempx,tempy,temp_size,temp_speed,temp_color) {
+            this.x=tempx;
+            this.y=tempy;
+            this.size=temp_size;
+            this.speed=temp_speed;
+            this.color=temp_color;
+                     //Krop
+            fill(this.color);
+            ellipse(this.x,this.y,this.size,this.size/2);
+            // Øje
+            fill('#000000');
+            if(this.speed > 0){
+                ellipse(this.x+this.size/4,this.y,this.size/8,this.size/8);
+            }
+            else {
+                ellipse(this.x-this.size/4,this.y,this.size/8,this.size/8);
+            }
+            // Hale
+            fill(this.color);
+            if(this.speed > 0){
+                triangle(this.x-this.size/2,this.y,this.x-this.size/2-this.size/4,this.y-this.size/4,this.x-this.size/2-this.size/4,this.y+this.size/4);
+            }
+            else {
+                 triangle(this.x+this.size/2,this.y,this.x+this.size/2+this.size/4,this.y-this.size/4,this.x+this.size/2+this.size/4,this.y+this.size/4);
+            }
+           /* this.x = this.x + this.speed;
+            if(this.x > width || this.x < 0){
+                 this.speed = this.speed * -1;
+            }*/
+        }
+</script>
+<title>Array</title>
+</head>
+<body>
+<div id="canvas-holder"></div>
+  
+</body>
+</html> 
