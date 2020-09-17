@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+	<style>
+		* {box-sizing: border-box; 
+		   margin: 0px;
+		}
+		#canvas-holder {background-color: white;
+						display: grid; 
+						justify-items: center; 
+						align-items: center; 
+						width: 100vw; 
+						height: 100vh; 
+		}		
+	</style>
+	<script>
+
+var x=[];
+var y=[];
+var speed=[];
+var size=[];
+var color=[];
+var fish=[];       
+var bubbleX=[], bubbleY=[],bubbleSpeed=[], bubbleSize=[],bubbleAlpha=[];
+function setup() {
+    var canvas = createCanvas(600,400);
+	canvas.parent("canvas-holder");
+ 
+    
+    for ( i=0;i<6;i++){
+        x[i]=0;
+        if (i%2){
+            y[i]=100;
+            color[i]='#33ccff';
+        }
+        else {
+            y[i]=300;
+            color[i]='#ff99cc';}
+            
+        speed[i]=random(0.50,2);
+        size[i]=80;console.log(x[i],y[i],size[i],speed[i],color[i])
+        
+    }
+    for (i=0;i<6; i++){
+        fish[i]= new fisk(x[i],y[i],size[i],speed[i],color[i])   
+        
+    }
+  
+  for ( i=0; i<10;i++){
+          bubbleX[i] = random(width);
+            bubbleY[i] = height;
+      bubbleSpeed[i] = random(0.5,2.5);
+      bubbleSize[i] = random(15,25);
+
+  }
+    console.log("setup kørt")
+}
+
+function draw() {
+	background('#2e8b57 '); 
+	noStroke();
+
+
+	for ( i=0;i<6;i++){
+         fish[i].display();
+
+       fish[i].move;
+        }
+ 
+   
+
+	strokeWeight(2.5);
+	for ( i=0; i<10;i++){
+        	stroke(150, 255, 255, bubbleAlpha[i]);
+	       fill(150, 255, 255, bubbleAlpha[i]);
+	       ellipse(bubbleX[i],bubbleY[i],bubbleSize[i],bubbleSize[i]);
+    }
+	
+    
+    
+    for ( i=0; i<10;i++){
+            bubbleY[i] = bubbleY[i] - bubbleSpeed[i];
+   
+}
+    for ( i=0; i<10;i++){
+           if(bubbleY[i] < 0){
+           bubbleY[i] = height;
+           bubbleX[i] = random(width);
+    } 
+   
+}
+    
+}
+        function fisk(tempx,tempy,temp_size,temp_speed,temp_color) {
+            this.x=tempx;
+            this.y=tempy;
+            this.size=temp_size;
+            this.speed=temp_speed;
+            this.color=temp_color;
+
+            this.display= function(){
+            //Krop
+            fill(this.color);
+            ellipse(this.x,this.y,this.size,this.size/2);
+            // Øje
+            fill('#000000');
+            if(this.speed > 0){
+                ellipse(this.x+this.size/4,this.y,this.size/8,this.size/8);
+            }
+            else {
+                ellipse(this.x-this.size/4,this.y,this.size/8,this.size/8);
+            }
+            // Hale
+            fill(this.color);
+            if(this.speed > 0){
+                triangle(this.x-this.size/2,this.y,this.x-this.size/2-this.size/4,this.y-this.size/4,this.x-this.size/2-this.size/4,this.y+this.size/4);
+            }
+            else {
+                 triangle(this.x+this.size/2,this.y,this.x+this.size/2+this.size/4,this.y-this.size/4,this.x+this.size/2+this.size/4,this.y+this.size/4);
+            }
+            
+            }
+            this.move= function(){
+            this.x = this.x + this.speed;
+            if(this.x > width || this.x < 0){
+                 this.speed = this.speed * -1;
+            }    
+            }
+        }
+</script>
+<title>Array</title>
+</head>
+<body>
+<div id="canvas-holder"></div>
+  
+</body>
+</html> 
