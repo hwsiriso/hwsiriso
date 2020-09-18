@@ -22,9 +22,9 @@
         }
     </style>
     <script>
-        var x,y,speed,size,color ;
-       
-        var fish = [0, 1, 2, 3, 4, 5];
+        var fish = Array.from(Array(6).keys());
+        // var fish = [...Array(6).keys()];
+        // var fish = Array.from({length: 6}, (_, i) => i);
         var bubbleX = [],
             bubbleY = [],
             bubbleSpeed = [],
@@ -35,8 +35,8 @@
             var canvas = createCanvas(600, 400);
             canvas.parent("canvas-holder");
 
-
-            for (i = 0; i < fish.length; i++) {
+            for (var i = 0; i < fish.length; i++) {
+                var x,y,speed,size,color;
                 x = 0;
                 if (i % 2) {
                     y = 100;
@@ -52,7 +52,7 @@
             }
            
 
-            for (i = 0; i < 10; i++) {
+            for (var i = 0; i < 10; i++) {
                 bubbleX[i] = random(width);
                 bubbleY[i] = height;
                 bubbleSpeed[i] = random(0.5, 2.5);
